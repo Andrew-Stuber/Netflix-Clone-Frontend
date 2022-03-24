@@ -1,4 +1,4 @@
-# events-app
+# login-app
 
 ## Project setup
 ```

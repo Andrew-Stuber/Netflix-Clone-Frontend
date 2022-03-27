@@ -15,7 +15,7 @@
         @click="logout"
       >
         Logout
-        <v-icon>mdi-open-in-new</v-icon>
+        <v-icon dark right>mdi-open-in-new</v-icon>
       </v-btn>
       <div class="text-center">
         <v-dialog v-model="dialog" width="500">
@@ -28,7 +28,7 @@
               v-on="on"
             >
               Delete User
-              <v-icon dark right> mdi-cancel </v-icon>
+              <v-icon dark right>mdi-cancel</v-icon>
             </v-btn>
           </template>
 

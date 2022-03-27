@@ -45,7 +45,6 @@ export default {
       this.$refs.videoPlayer,
       this.options,
       function onPlayerReady() {
-        console.log("onPlayerReady", this);
         this.currentTime(store.state.timestamp);
       }
     );
@@ -62,7 +61,6 @@ export default {
       formData.append("username", store.state.username);
       formData.append("timestamp", this.player.currentTime());
       await Vue.axios.post("/api/update", formData);
-      console.log(this.player.currentTime());
     },
   },
 };

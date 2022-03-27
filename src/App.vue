@@ -89,7 +89,7 @@ export default {
       let formData = new FormData();
       formData.append("username", username);
 
-      let response = await Vue.axios.post("/api/delete", formData);
+      let response = await Vue.axios.get("/api/delete");
       if (response.data.success) {
         await this.$router.push({ path: "/login" });
       }

@@ -11,6 +11,7 @@ export default new Vuex.Store({
     user: null,
     role: "",
     timestamp: 0,
+    videos: null,
   },
   mutations: {
     setLoggedIn(state, loggedIn) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     setTimestamp(state, timestamp) {
       state.timestamp = timestamp;
     },
+    setVideos(state, videos) {
+      state.videos = videos;
+    },
   },
   actions: {
     setUserState({ commit }, payload) {
@@ -43,6 +47,9 @@ export default new Vuex.Store({
       commit("setName", null);
       commit("setRole", "");
       commit("setTimestamp", 0);
+    },
+    setVideos({ commit }, payload) {
+      commit("setVideos", payload);
     },
   },
   modules: {},

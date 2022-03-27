@@ -7,6 +7,9 @@
       </li>
     </ul>
     <div>
+      <h1>{{ title }}</h1>
+    </div>
+    <div>
       <video-player :options="videoOptions" />
     </div>
   </v-container>
@@ -14,6 +17,7 @@
 
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
+import store from "@/store";
 
 export default {
   name: "Video.vue",
@@ -22,13 +26,19 @@ export default {
   },
   data() {
     return {
+      title: store.state.videos.find(
+        (video) => video.filename.localeCompare(this.$route.params.id) === 0
+      ).title,
       videoOptions: {
         autoplay: true,
         muted: true,
         controls: true,
         sources: [
           {
-            src: "http://localhost:8082/hls/sample1.mp4/index.m3u8", // link to the video!!!
+            src: store.state.videos.find(
+              (video) =>
+                video.filename.localeCompare(this.$route.params.id) === 0
+            ).link, // link to the video!!!
             type: "application/x-mpegurl",
           },
         ],

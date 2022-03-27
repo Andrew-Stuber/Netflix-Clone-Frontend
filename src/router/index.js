@@ -30,7 +30,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Login.vue"),
   },
   {
-    path: "/video",
+    path: "/video/:id",
     name: "Video",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -46,6 +46,9 @@ const router = new VueRouter({
 
 // Setup beforeEach hook to check the logged in sync the login states with backend
 router.beforeEach(async (to, from, next) => {
+  // get videos
+  response = await Vue.axios.get("/api/videos");
+  await store.dispatch("setVideos", response.data);
   // get login state using whoami and axios
   let response = await Vue.axios.get("/api/whoami");
   // response.data is out payload

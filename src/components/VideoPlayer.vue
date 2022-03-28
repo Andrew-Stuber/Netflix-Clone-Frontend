@@ -13,6 +13,7 @@ import store from "@/store";
 import Vue from "vue";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+// There are the theme that can be change for the video.
 // City
 import "@videojs/themes/dist/city/index.css";
 

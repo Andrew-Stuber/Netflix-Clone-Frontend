@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="secondary" dark>
+    <v-app-bar app color="tertiary" dark>
       <div class="d-flex align-center">
         <h3>Netflix Clone</h3>
       </div>

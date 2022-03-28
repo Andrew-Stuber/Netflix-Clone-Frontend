@@ -9,8 +9,9 @@ export default new Vuetify({
     themes: {
       dark: {
         // Color is applied to selected drop down item
-        primary: "#000000",
-        secondary: "#E50914",
+        primary: "#ffffff",
+        secondary: "#000000",
+        tertiary: "#E50914",
 
         // Uncomment this to make things worse
         // 'primary--text': '#FF00FF'

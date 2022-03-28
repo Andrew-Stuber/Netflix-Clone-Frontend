@@ -10,7 +10,6 @@ export default new Vuex.Store({
     username: null,
     user: null,
     role: "",
-    timestamp: 0,
     videos: null,
   },
   mutations: {
@@ -26,9 +25,6 @@ export default new Vuex.Store({
     setRole(state, isRole) {
       state.role = isRole;
     },
-    setTimestamp(state, timestamp) {
-      state.timestamp = timestamp;
-    },
     setVideos(state, videos) {
       state.videos = videos;
     },
@@ -39,14 +35,12 @@ export default new Vuex.Store({
       commit("setUsername", payload.username);
       commit("setName", payload.name);
       commit("setRole", payload.role);
-      commit("setTimestamp", payload.timestamp);
     },
     clearUserState({ commit }) {
       commit("setLoggedIn", false);
       commit("setUsername", null);
       commit("setName", null);
       commit("setRole", "");
-      commit("setTimestamp", 0);
     },
     setVideos({ commit }, payload) {
       commit("setVideos", payload);
@@ -61,7 +55,6 @@ export default new Vuex.Store({
       commit("setUsername", response.data.username);
       commit("setName", response.data.name);
       commit("setRole", response.data.role);
-      commit("setTimestamp", response.data.timestamp);
     },
   },
   modules: {},

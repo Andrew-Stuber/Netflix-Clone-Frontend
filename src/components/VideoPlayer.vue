@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import store from "@/store";
 import Vue from "vue";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -41,12 +40,16 @@ export default {
       player: null,
     };
   },
-  mounted() {
+  async mounted() {
+    let filename = this.$route.params.id;
+    let formData = new FormData();
+    formData.append("filename", filename);
+    let response = await Vue.axios.post("/api/timestamp/get", formData);
     this.player = videojs(
       this.$refs.videoPlayer,
       this.options,
       function onPlayerReady() {
-        this.currentTime(store.state.timestamp);
+        this.currentTime(response.data.timestamp);
       }
     );
   },
@@ -59,9 +62,9 @@ export default {
     // eslint-disable-next-line no-unused-vars
     async onPlayerTimeupdate(player) {
       let formData = new FormData();
-      formData.append("username", store.state.username);
+      formData.append("filename", this.$route.params.id);
       formData.append("timestamp", this.player.currentTime());
-      await Vue.axios.post("/api/update", formData);
+      await Vue.axios.post("/api/timestamp/update", formData);
     },
   },
 };

@@ -7,51 +7,60 @@
 
       <v-spacer></v-spacer>
 
-      <span class="mr-2">{{ $store.state.name }}</span>
-      <v-btn
-        :disabled="!$store.state.loggedIn"
-        color="success"
-        class="mr-4"
-        @click="logout"
-      >
-        Logout
-        <v-icon dark right>mdi-open-in-new</v-icon>
-      </v-btn>
-      <div class="text-center">
-        <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              :disabled="!$store.state.loggedIn"
-              color="red lighten-2"
-              dark
-              v-bind="attrs"
-              v-on="on"
-            >
-              Delete User
-              <v-icon dark right>mdi-cancel</v-icon>
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-card-title class="text-h5 grey lighten-2">
-              Delete User confirmation
-            </v-card-title>
-
-            <v-card-text>
-              Are you really sure you want to delete this user?
-            </v-card-text>
-
-            <v-divider></v-divider>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="deleteUser">
-                Yes, please
+      <v-menu left bottom open-delay="100">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <div>
+          <span class="mr-2">{{ $store.state.name }}</span>
+        </div>
+        <v-btn
+          :disabled="!$store.state.loggedIn"
+          color="success"
+          class="mr-4"
+          @click="logout"
+        >
+          Logout
+          <v-icon dark right>mdi-open-in-new</v-icon>
+        </v-btn>
+        <div class="text-center">
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                :disabled="!$store.state.loggedIn"
+                color="red lighten-2"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                Delete User
+                <v-icon dark right>mdi-cancel</v-icon>
               </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </div>
+            </template>
+
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Delete User confirmation
+              </v-card-title>
+
+              <v-card-text>
+                Are you really sure you want to delete this user?
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="deleteUser">
+                  Yes, please
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+      </v-menu>
     </v-app-bar>
 
     <v-main>

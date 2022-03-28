@@ -4,10 +4,10 @@
       <v-alert v-if="createSuccess" dense text type="success">
         User created successfully. Now you can login.
       </v-alert>
-      <v-alert v-if="createError" dense outlined type="error">
+      <v-alert v-if="createError" dense text type="error">
         {{ errorMessage }}
       </v-alert>
-      <v-alert v-if="loginError" dense outlined type="error">
+      <v-alert v-if="loginError" dense text type="error">
         Error: Username or password are incorrect.
       </v-alert>
       <v-layout justify-center md-10>

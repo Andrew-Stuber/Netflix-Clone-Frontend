@@ -10,28 +10,44 @@
       <v-alert v-if="loginError" dense outlined type="error">
         Error: Username or password are incorrect.
       </v-alert>
-      <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field
-          v-model="username"
-          :rules="usernameRules"
-          label="Username"
-          required
-        ></v-text-field>
+      <v-layout justify-center md-10>
+        <v-card class="#424242 elevation-12" max-width="500" max-height="500">
+          <v-row justify="center">
+            <v-form class="pa-15" ref="form" v-model="valid" lazy-validation>
+              <h1>Sign In</h1>
+              <v-text-field
+                color="white"
+                v-model="username"
+                :rules="usernameRules"
+                label="Username"
+                required
+              ></v-text-field>
 
-        <v-text-field
-          type="password"
-          v-model="password"
-          :rules="passwordRules"
-          label="Password"
-          required
-        ></v-text-field>
+              <v-text-field
+                color="white"
+                type="password"
+                v-model="password"
+                :rules="passwordRules"
+                label="Password"
+                required
+              ></v-text-field>
 
-        <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit">
-          Login
-        </v-btn>
+              <v-btn
+                :disabled="!valid"
+                color="#dc0913"
+                class="mr-4 white--text"
+                @click="submit"
+              >
+                Sign In
+              </v-btn>
 
-        <v-btn color="primary" class="mr-4" @click="create"> Create </v-btn>
-      </v-form>
+              <v-btn color="#616161" class="mr-4 white--text" @click="create">
+                Create
+              </v-btn>
+            </v-form>
+          </v-row>
+        </v-card>
+      </v-layout>
     </template>
   </v-container>
 </template>
@@ -94,3 +110,18 @@ export default {
   },
 };
 </script>
+
+<style>
+v-form {
+  border-radius: 3rem;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  outline: none;
+  margin: 10px;
+  width: 30%;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+</style>

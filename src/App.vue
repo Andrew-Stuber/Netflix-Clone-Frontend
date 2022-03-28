@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="secondary" dark>
       <div class="d-flex align-center">
-        <h3>SSC-Project</h3>
+        <h3>Netflix Clone</h3>
       </div>
 
       <v-spacer></v-spacer>
@@ -66,6 +66,10 @@ import store from "@/store";
 
 export default {
   name: "App",
+
+  created() {
+    document.body.style.backgroundColor = "#000000";
+  },
 
   data() {
     return {

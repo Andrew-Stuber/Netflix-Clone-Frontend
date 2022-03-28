@@ -47,12 +47,10 @@ const router = new VueRouter({
 // Setup beforeEach hook to check the logged in sync the login states with backend
 router.beforeEach(async (to, from, next) => {
   // get videos
-  response = await Vue.axios.get("/api/videos");
-  await store.dispatch("setVideos", response.data);
+  await store.dispatch("retrieveVideos");
   // get login state using whoami and axios
-  let response = await Vue.axios.get("/api/whoami");
   // response.data is out payload
-  await store.dispatch("setUserState", response.data);
+  await store.dispatch("retrieveUserState");
   let loggedIn = store.state.loggedIn;
   if (to.name === "Login" && loggedIn) {
     next({ name: "Home" });

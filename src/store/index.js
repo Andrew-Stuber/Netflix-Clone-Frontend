@@ -51,6 +51,18 @@ export default new Vuex.Store({
     setVideos({ commit }, payload) {
       commit("setVideos", payload);
     },
+    async retrieveVideos({ commit }) {
+      let response = await Vue.axios.get("/api/videos");
+      commit("setVideos", response.data);
+    },
+    async retrieveUserState({ commit }) {
+      let response = await Vue.axios.get("/api/whoami");
+      commit("setLoggedIn", response.data.loggedIn);
+      commit("setUsername", response.data.username);
+      commit("setName", response.data.name);
+      commit("setRole", response.data.role);
+      commit("setTimestamp", response.data.timestamp);
+    },
   },
   modules: {},
 });

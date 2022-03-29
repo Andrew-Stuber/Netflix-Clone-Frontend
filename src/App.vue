@@ -1,8 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar app color="tertiary" dark>
+    <v-app-bar app color="red darken-4">
       <div class="d-flex align-center">
-        <h3>Netflix Clone</h3>
+        <img
+          class="mr-3"
+          :src="require('./assets/Among-Us-Logo.png')"
+          height="40"
+        />
       </div>
 
       <v-spacer></v-spacer>
@@ -82,6 +86,7 @@ export default {
 
   data() {
     return {
+      video: store.state.videos,
       dialog: false,
     };
   },

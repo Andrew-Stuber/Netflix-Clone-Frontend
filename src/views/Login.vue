@@ -1,54 +1,75 @@
 <template>
-  <v-container>
-    <template>
-      <v-alert v-if="createSuccess" dense text type="success">
-        User created successfully. Now you can login.
-      </v-alert>
-      <v-alert v-if="createError" dense text type="error">
-        {{ errorMessage }}
-      </v-alert>
-      <v-alert v-if="loginError" dense text type="error">
-        Error: Username or password are incorrect.
-      </v-alert>
-      <v-layout justify-center md-10>
-        <v-card class="#424242 elevation-12" max-width="500" max-height="500">
-          <v-row justify="center">
-            <v-form class="pa-15" ref="form" v-model="valid" lazy-validation>
-              <h1>Sign In</h1>
-              <v-text-field
-                color="white"
-                v-model="username"
-                :rules="usernameRules"
-                label="Username"
-                required
-              ></v-text-field>
+  <v-container fill-height>
+    <v-layout align-center justify-center>
+      <v-card color="hsla(0, 5%, 0%, 0.7)">
+        <v-row>
+          <v-form class="pa-15" ref="form" v-model="valid" lazy-validation>
+            <h1>Sign In</h1>
+            <v-text-field
+              color="white"
+              v-model="username"
+              :rules="usernameRules"
+              label="Username"
+              required
+            ></v-text-field>
 
-              <v-text-field
-                color="white"
-                type="password"
-                v-model="password"
-                :rules="passwordRules"
-                label="Password"
-                required
-              ></v-text-field>
+            <v-text-field
+              color="white"
+              type="password"
+              v-model="password"
+              :rules="passwordRules"
+              label="Password"
+              required
+            ></v-text-field>
 
-              <v-btn
-                :disabled="!valid"
-                color="#dc0913"
-                class="mr-4 white--text"
-                @click="submit"
-              >
-                Sign In
-              </v-btn>
+            <v-btn
+              :disabled="!valid"
+              color="#dc0913"
+              class="mr-4 white--text"
+              @click="submit"
+            >
+              Sign In
+            </v-btn>
 
-              <v-btn color="#616161" class="mr-4 white--text" @click="create">
-                Create
-              </v-btn>
-            </v-form>
-          </v-row>
-        </v-card>
-      </v-layout>
-    </template>
+            <v-btn color="#616161" class="mr-4 white--text" @click="create">
+              Create
+            </v-btn>
+
+            <v-checkbox v-model="checkbox">
+              <template v-slot:label>
+                <div>
+                  I agree to the
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <a
+                        target="_blank"
+                        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                        @click.stop
+                        v-on="on"
+                      >
+                        Terms and Conditions
+                      </a>
+                    </template>
+                    Opens in new window
+                  </v-tooltip>
+                </div>
+              </template>
+            </v-checkbox>
+          </v-form>
+        </v-row>
+        <div>
+          <v-alert v-if="createSuccess" dense text type="success">
+            User created successfully. Now you can login.
+          </v-alert>
+          <v-alert v-if="createError" dense text type="error">
+            {{ errorMessage }}
+          </v-alert>
+          <v-alert v-if="loginError" dense text type="error">
+            Error: Username or password are incorrect.
+          </v-alert>
+        </div>
+      </v-card>
+    </v-layout>
   </v-container>
 </template>
 
@@ -111,17 +132,9 @@ export default {
 };
 </script>
 
-<style>
-v-form {
-  border-radius: 3rem;
-  border: none;
-  padding: 10px;
-  text-align: center;
-  outline: none;
-  margin: 10px;
-  width: 30%;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
+<style lang="scss">
+main {
+  background-image: url(../assets/website.jpeg);
+  background-size: cover;
 }
 </style>

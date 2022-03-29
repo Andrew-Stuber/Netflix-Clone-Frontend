@@ -35,7 +35,7 @@
               Create
             </v-btn>
 
-            <v-checkbox v-model="checkbox">
+            <v-checkbox v-model="checkbox" aria-required="true">
               <template v-slot:label>
                 <div>
                   I agree to the

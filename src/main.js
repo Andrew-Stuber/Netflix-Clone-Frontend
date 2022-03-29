@@ -8,9 +8,6 @@ import "./plugins/vue-axios";
 Vue.config.productionTip = false;
 
 new Vue({
-  data: {
-    active: false,
-  },
   router,
   store,
   vuetify,

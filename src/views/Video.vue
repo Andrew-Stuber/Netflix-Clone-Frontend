@@ -20,7 +20,7 @@ import VideoPlayer from "@/components/VideoPlayer.vue";
 import store from "@/store";
 
 export default {
-  name: "Video.vue",
+  name: "Video",
   components: {
     VideoPlayer,
   },

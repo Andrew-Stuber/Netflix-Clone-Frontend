@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h2>Home Page</h2>
     <ul>
       <!--li>
         <router-link to="/about">Go to About</router-link>
@@ -24,6 +23,7 @@
               <!-- Video Link -->
               <router-link class="routerLink" :to="'/video/' + video.filename">
                 <div @click="spinner = true">
+                  <h2>{{ video.title }}</h2>
                   <v-img
                     lazy-src="https://i.imgur.com/XJRowdx.png"
                     height="200px"
@@ -35,18 +35,23 @@
                     :options="setVideoSrc(video.link)"
                     v-if="mouseHover[index]"
                   />
-                  <v-card-title class="justify-center">
-                    {{ video.title }}
-                  </v-card-title>
+                  <!--                  <v-card-title class="justify-center">-->
+                  <!--                    {{ video.title }}-->
+                  <!--                  </v-card-title>-->
                 </div>
               </router-link>
 
               <!-- Drop Down -->
               <v-card-actions>
+                <v-btn icon>
+                  <v-icon>{{
+                    show.at(index) ? "mdi-check" : "mdi-plus"
+                  }}</v-icon>
+                </v-btn>
                 <v-spacer />
                 <v-btn icon @click="setDescription(index)">
                   <v-icon>{{
-                    show.indexOf(index) ? "mdi-chevron-up" : "mdi-chevron-down"
+                    show.at(index) ? "mdi-chevron-up" : "mdi-chevron-down"
                   }}</v-icon>
                 </v-btn>
               </v-card-actions>

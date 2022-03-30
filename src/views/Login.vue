@@ -1,82 +1,105 @@
 <template>
   <v-container fill-height>
     <v-layout align-center justify-center>
-      <v-card color="hsla(0, 5%, 0%, 0.7)">
-        <v-row>
-          <v-form class="pa-15" ref="form" v-model="valid" lazy-validation>
-            <h1>Sign In</h1>
-            <v-text-field
-              color="white"
-              v-model="username"
-              :rules="usernameRules"
-              label="Username"
-              required
-            ></v-text-field>
+      <div class="bg-image">
+        <div class="card">
+          <v-card color="hsla(0, 5%, 0%, 0.65)">
+            <v-row>
+              <v-form class="pa-15" ref="form" v-model="valid" lazy-validation>
+                <h1>Sign In</h1>
 
-            <v-text-field
-              color="white"
-              type="password"
-              v-model="password"
-              :rules="passwordRules"
-              label="Password"
-              required
-            ></v-text-field>
+                <div class="pa-2"></div>
 
-            <v-btn
-              :disabled="!valid"
-              color="#dc0913"
-              class="mr-4 white--text"
-              @click="submit"
-            >
-              Sign In
-              <v-tooltip bottom>
-                <span>I'm A Tooltip</span>
-              </v-tooltip>
-            </v-btn>
+                <v-text-field
+                  color="white"
+                  v-model="username"
+                  :rules="usernameRules"
+                  label="Username"
+                  required
+                  hide-details="auto"
+                  outlined
+                ></v-text-field>
 
-            <v-btn color="#616161" class="mr-4 white--text" @click="create">
-              Create
-            </v-btn>
+                <div class="pa-2"></div>
 
-            <v-checkbox
-              v-model="checkbox"
-              :rules="checkboxRules"
-              label="Checkbox"
-              required
-            >
-              <template v-slot:label>
-                <div>
-                  I agree to the
+                <v-text-field
+                  color="white"
+                  type="password"
+                  v-model="password"
+                  :rules="passwordRules"
+                  label="Password"
+                  required
+                  hide-details="auto"
+                  outlined
+                ></v-text-field>
+
+                <div class="pa-2"></div>
+
+                <v-btn
+                  block
+                  :disabled="!valid"
+                  color="#dc0913"
+                  class="mr-4 white--text"
+                  @click="submit"
+                >
+                  Sign In
                   <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <a
-                        target="_blank"
-                        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                        @click.stop
-                        v-on="on"
-                      >
-                        Terms and Conditions
-                      </a>
-                    </template>
-                    Opens in new window
+                    <span>I'm A Tooltip</span>
                   </v-tooltip>
-                </div>
-              </template>
-            </v-checkbox>
-          </v-form>
-        </v-row>
-        <div>
-          <v-alert v-if="createSuccess" dense text type="success">
-            User created successfully. Now you can login.
-          </v-alert>
-          <v-alert v-if="createError" dense text type="error">
-            {{ errorMessage }}
-          </v-alert>
-          <v-alert v-if="loginError" dense text type="error">
-            Error: Username or password are incorrect.
-          </v-alert>
+                </v-btn>
+
+                <div class="pa-1"></div>
+
+                <v-btn
+                  block
+                  color="#616161"
+                  class="mr-4 white--text"
+                  @click="create"
+                >
+                  Create
+                </v-btn>
+
+                <v-checkbox
+                  v-model="checkbox"
+                  :rules="checkboxRules"
+                  label="Checkbox"
+                  required
+                >
+                  <template v-slot:label>
+                    <div>
+                      I agree to the
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <a
+                            target="_blank"
+                            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                            @click.stop
+                            v-on="on"
+                          >
+                            Terms and Conditions
+                          </a>
+                        </template>
+                        Opens in new window
+                      </v-tooltip>
+                    </div>
+                  </template>
+                </v-checkbox>
+              </v-form>
+            </v-row>
+            <div>
+              <v-alert v-if="createSuccess" dense text type="success">
+                User created successfully. Now you can login.
+              </v-alert>
+              <v-alert v-if="createError" dense text type="error">
+                {{ errorMessage }}
+              </v-alert>
+              <v-alert v-if="loginError" dense text type="error">
+                Error: Username or password are incorrect.
+              </v-alert>
+            </div>
+          </v-card>
         </div>
-      </v-card>
+      </div>
     </v-layout>
   </v-container>
 </template>
@@ -141,8 +164,26 @@ export default {
 </script>
 
 <style lang="scss">
-main {
-  background-image: url(../assets/website.jpeg);
+.bg-image {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-image:before {
+  content: "";
+  background-image: url(../assets/bg-image.jpg);
   background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.4;
+}
+.card {
+  display: flex;
+  position: relative;
 }
 </style>

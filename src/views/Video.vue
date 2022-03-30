@@ -1,15 +1,16 @@
 <template>
   <v-container>
-    <h2>Video Page</h2>
-    <ul>
-      <li>
-        <router-link to="/">Go to Home</router-link>
-      </li>
-    </ul>
-    <div>
-      <h1>{{ title }}</h1>
-    </div>
-    <div>
+    <v-row class="pa-3">
+      <div class="mr-5">
+        <v-btn to="/" icon x-large>
+          <v-icon dark right>mdi-arrow-left</v-icon>
+        </v-btn>
+      </div>
+      <div class="title pa-3">
+        <h1>{{ title }}</h1>
+      </div>
+    </v-row>
+    <div class="pa-2">
       <video-player :options="videoOptions" />
     </div>
   </v-container>

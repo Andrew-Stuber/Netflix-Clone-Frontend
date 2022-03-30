@@ -38,7 +38,12 @@
               Create
             </v-btn>
 
-            <v-checkbox v-model="checkbox" aria-required="true">
+            <v-checkbox
+              v-model="checkbox"
+              :rules="checkboxRules"
+              label="Checkbox"
+              required
+            >
               <template v-slot:label>
                 <div>
                   I agree to the
@@ -85,6 +90,7 @@ export default {
     password: "",
     usernameRules: [(v) => !!v || "Username is required"],
     passwordRules: [(v) => !!v || "Password is required"],
+    checkboxRules: [(v) => !!v || "Must accept the Terms and Conditions"],
     createSuccess: false,
     createError: false,
     loginError: false,

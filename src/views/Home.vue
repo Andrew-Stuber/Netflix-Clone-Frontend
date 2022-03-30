@@ -23,7 +23,7 @@
               <!-- Video Link -->
               <router-link class="routerLink" :to="'/video/' + video.id">
                 <div @click="spinner = true">
-                  <h2>{{ video.title }}</h2>
+                  <h2 class="ml-2">{{ video.title }}</h2>
                   <v-img
                     lazy-src="https://i.imgur.com/XJRowdx.png"
                     height="200px"

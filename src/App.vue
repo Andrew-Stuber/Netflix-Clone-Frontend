@@ -28,60 +28,63 @@
 
       <v-spacer></v-spacer>
 
-      <v-menu left bottom open-delay="100">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <div>
-          <span class="mr-2">{{ $store.state.name }}</span>
-        </div>
-        <v-btn
-          :disabled="!$store.state.loggedIn"
-          color="success"
-          class="mr-4"
-          @click="logout"
-        >
-          Logout
-          <v-icon dark right>mdi-open-in-new</v-icon>
-        </v-btn>
-        <div class="text-center">
-          <v-dialog v-model="dialog" width="500">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                :disabled="!$store.state.loggedIn"
-                color="red lighten-2"
-                dark
-                v-bind="attrs"
-                v-on="on"
-              >
-                Delete User
-                <v-icon dark right>mdi-cancel</v-icon>
-              </v-btn>
-            </template>
+      <div>
+        <h3 class="mr-5">{{ $store.state.name }}</h3>
+      </div>
+      <v-btn
+        :disabled="!$store.state.loggedIn"
+        color="success"
+        class="mr-4"
+        @click="logout"
+      >
+        Logout
+        <v-icon dark right>mdi-open-in-new</v-icon>
+      </v-btn>
 
-            <v-card>
-              <v-card-title class="text-h5 grey lighten-2">
-                Delete User confirmation
-              </v-card-title>
-
-              <v-card-text>
-                Are you really sure you want to delete this user?
-              </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="deleteUser">
-                  Yes, please
+      <div class="text-center">
+        <v-menu bottom open-delay="100" offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on" :ripple="false">
+              <v-icon>mdi-cog</v-icon>
+            </v-btn>
+          </template>
+          <div class="text-center">
+            <v-dialog v-model="dialog" width="500">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  :disabled="!$store.state.loggedIn"
+                  color="red lighten-1"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  Delete User
+                  <v-icon dark right>mdi-cancel</v-icon>
                 </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </div>
-      </v-menu>
+              </template>
+
+              <v-card>
+                <v-card-title class="text-h6 red darken-3">
+                  Delete User confirmation
+                </v-card-title>
+
+                <v-card-text class="pa-3">
+                  Are you really sure you want to delete this user?
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="deleteUser">
+                    Yes, please
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </div>
+        </v-menu>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -95,10 +98,6 @@ import Vue from "vue";
 import store from "@/store";
 
 export default {
-  name: "App",
-  created() {
-    document.body.style.backgroundColor = "#000000";
-  },
   data() {
     return {
       video: store.state.videos,

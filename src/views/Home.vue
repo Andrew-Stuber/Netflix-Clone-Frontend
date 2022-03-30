@@ -38,7 +38,7 @@
               </v-card-actions>
 
               <v-expand-transition>
-                <div v-show="show.indexOf(index)">
+                <div v-show="show.at(index)">
                   <v-card-text>
                     {{ video.description }}
                   </v-card-text>
@@ -68,19 +68,25 @@ export default {
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
+      listedVideo: {
+        fileName: String,
+        title: String,
+        show: false,
+      },
+      listedVideos: new Array(store.state.numVideos).fill(this.listedVideo),
     };
   },
   methods: {
     setDescription(index) {
-      if (this.show[index] === undefined) {
-        this.show[index] = true;
-      } else {
-        this.show[index] = !this.show[index];
-      }
-      console.log(this.show);
+      this.$set(this.show, index, !this.show[index]);
+      console.log(this.show.at(index));
     },
+    /*updateListedVideos(item) {
+      listedVideos.at();
+    },*/
   },
   mounted() {
+    //videos.forEach();
     console.log(this.show);
   },
 };

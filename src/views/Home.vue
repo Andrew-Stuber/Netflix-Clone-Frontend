@@ -21,7 +21,7 @@
               @mouseleave="setMouseHoverLeave(index)"
             >
               <!-- Video Link -->
-              <router-link class="routerLink" :to="'/video/' + video.filename">
+              <router-link class="routerLink" :to="'/video/' + video.id">
                 <div @click="spinner = true">
                   <h2>{{ video.title }}</h2>
                   <v-img

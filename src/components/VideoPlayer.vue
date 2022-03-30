@@ -41,9 +41,9 @@ export default {
     };
   },
   async mounted() {
-    let filename = this.$route.params.id;
+    let videoId = this.$route.params.id;
     let formData = new FormData();
-    formData.append("filename", filename);
+    formData.append("videoId", videoId);
     let response = await Vue.axios.post("/api/timestamp/get", formData);
     this.player = videojs(
       this.$refs.videoPlayer,
@@ -62,7 +62,7 @@ export default {
     // eslint-disable-next-line no-unused-vars
     async onPlayerTimeupdate(player) {
       let formData = new FormData();
-      formData.append("filename", this.$route.params.id);
+      formData.append("videoId", this.$route.params.id);
       formData.append("timestamp", this.player.currentTime());
       await Vue.axios.post("/api/timestamp/update", formData);
     },

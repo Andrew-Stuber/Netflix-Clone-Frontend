@@ -14,13 +14,26 @@
           :key="index"
         >
           <div>
-            <v-card class="mx-auto" max-width="344" :ripple="true">
+            <v-card
+              class="mx-auto"
+              max-width="344"
+              :ripple="true"
+              @mouseenter="setMouseHoverEnter(index)"
+              @mouseleave="setMouseHoverLeave(index)"
+            >
+              <!-- Video Link -->
               <router-link class="routerLink" :to="'/video/' + video.filename">
                 <div @click="spinner = true">
                   <v-img
                     lazy-src="https://i.imgur.com/XJRowdx.png"
                     height="200px"
                     :src="video.thumbnail"
+                    v-show="!mouseHover[index]"
+                  />
+                  <!-- Box Video Stuff -->
+                  <BoxVideo
+                    :options="setVideoSrc(video.link)"
+                    v-if="mouseHover[index]"
                   />
                   <v-card-title class="justify-center">
                     {{ video.title }}
@@ -28,6 +41,7 @@
                 </div>
               </router-link>
 
+              <!-- Drop Down -->
               <v-card-actions>
                 <v-spacer />
                 <v-btn icon @click="setDescription(index)">
@@ -60,20 +74,29 @@
 
 <script>
 import store from "@/store";
-
+import BoxVideo from "@/views/BoxVideo";
 export default {
   name: "Home.vue",
+  components: {
+    BoxVideo,
+  },
   data() {
     return {
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
-      listedVideo: {
-        fileName: String,
-        title: String,
-        show: false,
+      mouseHover: new Array(store.state.numVideos).fill(false),
+      videoOptions: {
+        autoplay: true,
+        muted: true,
+        controls: true,
+        sources: [
+          {
+            src: "", // link to the video!!!
+            type: "application/x-mpegurl",
+          },
+        ],
       },
-      listedVideos: new Array(store.state.numVideos).fill(this.listedVideo),
     };
   },
   methods: {
@@ -81,13 +104,16 @@ export default {
       this.$set(this.show, index, !this.show[index]);
       console.log(this.show.at(index));
     },
-    /*updateListedVideos(item) {
-      listedVideos.at();
-    },*/
-  },
-  mounted() {
-    //videos.forEach();
-    console.log(this.show);
+    setMouseHoverEnter(index) {
+      this.$set(this.mouseHover, index, true);
+    },
+    setMouseHoverLeave(index) {
+      this.$set(this.mouseHover, index, false);
+    },
+    setVideoSrc(videoLink) {
+      this.$set(this.videoOptions.sources[0], "src", videoLink);
+      return this.videoOptions;
+    },
   },
 };
 </script>

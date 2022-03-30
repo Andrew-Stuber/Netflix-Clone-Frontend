@@ -13,20 +13,39 @@
           v-for="(video, index) in videos"
           :key="index"
         >
-          <router-link class="routerLink" :to="'/video/' + video.filename">
-            <div @click="active = true">
-              <v-card class="mx-auto" max-width="344" :ripple="true">
-                <v-img
-                  lazy-src="https://i.imgur.com/XJRowdx.png"
-                  height="200px"
-                  :src="video.thumbnail"
-                />
-                <v-card-title class="justify-center">
-                  {{ video.title }}
-                </v-card-title>
-              </v-card>
-            </div>
-          </router-link>
+          <div>
+            <v-card class="mx-auto" max-width="344" :ripple="true">
+              <router-link class="routerLink" :to="'/video/' + video.filename">
+                <div @click="spinner = true">
+                  <v-img
+                    lazy-src="https://i.imgur.com/XJRowdx.png"
+                    height="200px"
+                    :src="video.thumbnail"
+                  />
+                  <v-card-title class="justify-center">
+                    {{ video.title }}
+                  </v-card-title>
+                </div>
+              </router-link>
+
+              <v-card-actions>
+                <v-spacer />
+                <v-btn icon @click="setDescription(index)">
+                  <v-icon>{{
+                    show.indexOf(index) ? "mdi-chevron-up" : "mdi-chevron-down"
+                  }}</v-icon>
+                </v-btn>
+              </v-card-actions>
+
+              <v-expand-transition>
+                <div v-show="show.indexOf(index)">
+                  <v-card-text>
+                    {{ video.description }}
+                  </v-card-text>
+                </div>
+              </v-expand-transition>
+            </v-card>
+          </div>
         </v-col>
       </v-row>
     </ul>
@@ -34,7 +53,7 @@
       class="spinner"
       indeterminate
       color="primary"
-      v-if="active"
+      v-if="spinner"
     />
   </v-container>
 </template>
@@ -47,8 +66,22 @@ export default {
   data() {
     return {
       videos: store.state.videos,
-      active: false,
+      spinner: false,
+      show: new Array(store.state.numVideos).fill(false),
     };
+  },
+  methods: {
+    setDescription(index) {
+      if (this.show[index] === undefined) {
+        this.show[index] = true;
+      } else {
+        this.show[index] = !this.show[index];
+      }
+      console.log(this.show);
+    },
+  },
+  mounted() {
+    console.log(this.show);
   },
 };
 </script>

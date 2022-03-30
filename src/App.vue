@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="red darken-4">
+    <v-app-bar app color="red darken-4" elevation="4">
       <div class="d-flex align-center">
         <img
           class="mr-3"
@@ -79,18 +79,15 @@ import store from "@/store";
 
 export default {
   name: "App",
-
   created() {
     document.body.style.backgroundColor = "#000000";
   },
-
   data() {
     return {
       video: store.state.videos,
       dialog: false,
     };
   },
-
   methods: {
     async logout() {
       let response = await Vue.axios.get("/api/logout");
@@ -100,7 +97,6 @@ export default {
         await this.$router.push({ path: "/login" });
       }
     },
-
     async deleteUser() {
       this.dialog = false;
       let username = store.state.username;

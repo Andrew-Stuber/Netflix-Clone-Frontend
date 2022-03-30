@@ -11,6 +11,7 @@ export default new Vuex.Store({
     user: null,
     role: "",
     videos: null,
+    numVideos: 0,
   },
   mutations: {
     setLoggedIn(state, loggedIn) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     setVideos(state, videos) {
       state.videos = videos;
+    },
+    setNumVideos(state, numVideos) {
+      state.numVideos = numVideos;
     },
   },
   actions: {
@@ -48,6 +52,7 @@ export default new Vuex.Store({
     async retrieveVideos({ commit }) {
       let response = await Vue.axios.get("/api/videos");
       commit("setVideos", response.data);
+      commit("setNumVideos", response.data.length);
     },
     async retrieveUserState({ commit }) {
       let response = await Vue.axios.get("/api/whoami");

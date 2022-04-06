@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video ref="videoPlayer" class="video-js vjs-theme-city vjs-4-3" />
+    <video ref="videoPlayer" class="video-js vjs-theme-city vjs-16-9" />
   </div>
 </template>
 

@@ -8,7 +8,7 @@
         <v-col
           cols="12"
           sm="3"
-          md="3"
+          md="4"
           v-for="(video, index) in videos"
           :key="index"
         >

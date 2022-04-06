@@ -4,6 +4,7 @@
       ref="videoPlayer"
       class="video-js vjs-theme-city vjs-fluid"
       @timeupdate="onPlayerTimeupdate($event)"
+      @volumechange="onPlayerVolumeUpdate($event)"
     ></video>
   </div>
 </template>
@@ -44,12 +45,12 @@ export default {
     let videoId = this.$route.params.id;
     let formData = new FormData();
     formData.append("videoId", videoId);
-    let response = await Vue.axios.post("/api/timestamp/get", formData);
+    let responseTime = await Vue.axios.post("/api/timestamp/get", formData);
     this.player = videojs(
       this.$refs.videoPlayer,
       this.options,
       function onPlayerReady() {
-        this.currentTime(response.data.timestamp);
+        this.currentTime(responseTime.data.timestamp);
       }
     );
   },
@@ -62,7 +63,6 @@ export default {
     // eslint-disable-next-line no-unused-vars
     async onPlayerTimeupdate(player) {
       let formData = new FormData();
-      formData.append("videoId", this.$route.params.id);
       formData.append("timestamp", this.player.currentTime());
       await Vue.axios.post("/api/timestamp/update", formData);
     },

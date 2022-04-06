@@ -44,9 +44,9 @@
 
               <!-- Drop Down -->
               <v-card-actions>
-                <v-btn icon>
+                <v-btn icon @click="setAddList(index)">
                   <v-icon>{{
-                    show.at(index) ? "mdi-check" : "mdi-plus"
+                    add.at(index) ? "mdi-check" : "mdi-plus"
                   }}</v-icon>
                 </v-btn>
                 <v-spacer />
@@ -91,6 +91,7 @@ export default {
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
+      add: new Array(store.state.numList).fill(false),
       mouseHover: new Array(store.state.numVideos).fill(false),
       videoOptions: {
         autoplay: true,
@@ -118,6 +119,9 @@ export default {
     setVideoSrc(videoLink) {
       this.$set(this.videoOptions.sources[0], "src", videoLink);
       return this.videoOptions;
+    },
+    setAddList(index) {
+      this.$set(this.add, index, !this.add.at(index));
     },
   },
 };

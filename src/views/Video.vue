@@ -46,7 +46,7 @@ export default {
       title: "",
       videoOptions: {
         autoplay: true,
-        muted: true,
+        muted: false,
         controls: true,
         controlBar: {
           pictureInPictureToggle: false,

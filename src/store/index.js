@@ -12,6 +12,8 @@ export default new Vuex.Store({
     role: "",
     videos: null,
     numVideos: 0,
+    list: null,
+    numList: 0,
   },
   mutations: {
     setLoggedIn(state, loggedIn) {
@@ -31,6 +33,12 @@ export default new Vuex.Store({
     },
     setNumVideos(state, numVideos) {
       state.numVideos = numVideos;
+    },
+    setList(state, list) {
+      state.list = list;
+    },
+    setNumList(state, numList) {
+      state.numList = numList;
     },
   },
   actions: {

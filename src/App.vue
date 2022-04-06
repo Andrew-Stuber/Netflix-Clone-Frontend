@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-app-bar
-      v-if="!['Login'].includes($route.name)"
+      v-if="!['Login', 'Video'].includes($route.name)"
       app
-      color="red darken-4"
+      color="#E50914"
       elevation="4"
     >
       <div class="d-flex align-center">
@@ -16,6 +16,9 @@
           <v-btn plain text to="/" :ripple="false">Home</v-btn>
         </div>
         <div>
+          <v-btn plain text :ripple="false" to="/list">My List</v-btn>
+        </div>
+        <div>
           <v-btn plain text :ripple="false">
             <a
               target="_blank"
@@ -26,9 +29,6 @@
             </a>
           </v-btn>
         </div>
-        <div>
-          <v-btn plain text :ripple="false">List</v-btn>
-        </div>
       </div>
 
       <v-spacer></v-spacer>
@@ -38,7 +38,7 @@
       </div>
       <v-btn
         :disabled="!$store.state.loggedIn"
-        color="success"
+        color="dark"
         class="mr-4"
         @click="logout"
       >

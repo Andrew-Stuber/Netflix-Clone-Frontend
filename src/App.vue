@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    <v-app-bar app color="red darken-4" elevation="4">
+    <v-app-bar
+      v-if="!['Login'].includes($route.name)"
+      app
+      color="red darken-4"
+      elevation="4"
+    >
       <div class="d-flex align-center">
         <img
           class="mr-3"

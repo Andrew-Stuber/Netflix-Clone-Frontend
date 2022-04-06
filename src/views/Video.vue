@@ -19,6 +19,7 @@
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
 import store from "@/store";
+import Vue from "vue";
 
 export default {
   name: "Video",
@@ -32,11 +33,14 @@ export default {
       );
     },
   },
-  created() {
-    console.log(store.state.videos);
-    console.log(this.getVideo.title);
+  async created() {
     this.$set(this, "title", this.getVideo.title);
     this.videoOptions.sources[0].src = this.getVideo.link;
+
+    let formData = new FormData();
+    formData.append("videoId", this.$route.params.id);
+    let response = await Vue.axios.post("/api/videos/comment", formData);
+    console.log(response.data);
   },
   data() {
     return {

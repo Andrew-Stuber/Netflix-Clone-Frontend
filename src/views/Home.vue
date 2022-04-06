@@ -8,14 +8,15 @@
         <v-col
           cols="12"
           sm="3"
-          md="4"
+          md="3"
           v-for="(video, index) in videos"
           :key="index"
         >
           <div>
             <v-card
               class="mx-auto"
-              max-width="344"
+              width="344"
+              max-height="360"
               :ripple="true"
               @mouseenter="setMouseHoverEnter(index)"
               @mouseleave="setMouseHoverLeave(index)"
@@ -94,7 +95,7 @@ export default {
       videoOptions: {
         autoplay: true,
         muted: true,
-        controls: true,
+        controls: false,
         sources: [
           {
             src: "", // link to the video!!!
@@ -107,7 +108,6 @@ export default {
   methods: {
     setDescription(index) {
       this.$set(this.show, index, !this.show[index]);
-      console.log(this.show.at(index));
     },
     setMouseHoverEnter(index) {
       this.$set(this.mouseHover, index, true);

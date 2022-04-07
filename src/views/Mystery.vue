@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="body">
     <v-col justify-end>
       <h1>Mystery</h1>
     </v-col>
@@ -139,16 +139,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.routerLink {
-  text-decoration: none;
-}
-.spinner {
-  top: 90%;
-  left: 90%;
-  position: absolute;
-}
-body {
-  background: #f6e9e3;
+.body {
+  background-image: url("../assets/mys.jpg");
   background-size: 100% 100%;
+  height: 100%;
 }
 </style>

@@ -53,13 +53,25 @@
 
               <!-- Drop Down -->
               <v-card-actions>
-                <v-btn icon @click="setAddList(index)">
+                <v-btn
+                  icon
+                  @click="
+                    setAddList(index);
+                    addToVideos(video);
+                  "
+                >
                   <v-icon>{{
                     add.at(index) ? "mdi-check" : "mdi-plus"
                   }}</v-icon>
                 </v-btn>
                 <v-spacer />
-                <v-btn icon @click="setDescription(index)">
+                <v-btn
+                  icon
+                  @click="
+                    setDescription(index);
+                    removeFromVideos(video);
+                  "
+                >
                   <v-icon>{{
                     show.at(index) ? "mdi-chevron-up" : "mdi-chevron-down"
                   }}</v-icon>
@@ -99,6 +111,7 @@ export default {
   data() {
     return {
       search: "",
+      videoList: [],
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
@@ -133,6 +146,12 @@ export default {
     },
     setAddList(index) {
       this.$set(this.add, index, !this.add.at(index));
+    },
+    addToVideos(video) {
+      this.videoList.push(video);
+    },
+    removeFromVideos(video) {
+      this.videoList.filter((v) => v !== video);
     },
   },
   computed: {

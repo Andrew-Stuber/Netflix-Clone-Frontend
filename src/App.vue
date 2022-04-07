@@ -6,29 +6,38 @@
       color="#E50914"
       elevation="4"
     >
-      <div class="d-flex align-center">
-        <img
-          class="mr-3"
-          :src="require('./assets/Among-Us-Logo.png')"
-          height="40"
-        />
-        <div>
-          <v-btn plain text to="/" :ripple="false">Home</v-btn>
-        </div>
-        <div>
-          <v-btn plain text :ripple="false" to="/list">My List</v-btn>
-        </div>
-        <div>
-          <v-btn plain text :ripple="false">
-            <a
-              target="_blank"
-              href="https://www.youtube.com/watch?v=5T5BY1j2MkE"
-              style="text-decoration: none"
-            >
-              About
-            </a>
-          </v-btn>
-        </div>
+      <div>
+        <v-btn
+          plain
+          :ripple="false"
+          target="_blank"
+          href="https://www.youtube.com/watch?v=5DlROhT8NgU"
+          style="text-decoration: none"
+        >
+          <img
+            class="mr-3"
+            :src="require('./assets/Among-Us-Logo.png')"
+            height="40"
+          />
+        </v-btn>
+      </div>
+
+      <div>
+        <v-btn plain text to="/" :ripple="false">Home</v-btn>
+      </div>
+      <div>
+        <v-btn plain text :ripple="false" to="/list">My List</v-btn>
+      </div>
+      <div>
+        <v-btn plain text :ripple="false">
+          <a
+            target="_blank"
+            href="https://www.youtube.com/watch?v=5T5BY1j2MkE"
+            style="text-decoration: none"
+          >
+            About
+          </a>
+        </v-btn>
       </div>
 
       <div class="text-center">

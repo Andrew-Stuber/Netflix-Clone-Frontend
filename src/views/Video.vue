@@ -27,22 +27,21 @@ export default {
   },
   computed: {
     getVideo() {
-      return store.state.videos.find(
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.savedVideo = store.state.videos.find(
         (video) => video.id == this.$route.params.id
       );
+      return this.savedVideo;
     },
   },
   async created() {
     this.$set(this, "title", this.getVideo.title);
     this.videoOptions.sources[0].src = this.getVideo.link;
-
-    /*let formData = new FormData();
-    formData.append("videoId", this.$route.params.id);
-    let response = await Vue.axios.post("/api/videos/comment", formData);
-    console.log(response.data);*/
   },
   data() {
     return {
+      savedVideo: null,
+      subtitles: [],
       title: "",
       videoOptions: {
         autoplay: true,

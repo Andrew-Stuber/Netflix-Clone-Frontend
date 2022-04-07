@@ -57,7 +57,7 @@
                 <v-btn
                   icon
                   @click="
-                    setAddList(index);
+                    addToList(index, video.id);
                     addToVideos(video);
                   "
                 >
@@ -103,11 +103,17 @@
 <script>
 import store from "@/store";
 import BoxVideo from "@/views/BoxVideo";
+import Vue from "vue";
 
 export default {
   name: "Home.vue",
   components: {
     BoxVideo,
+  },
+  created() {
+    for (let i = 0; i < store.state.list.length; i++) {
+      this.$set(this.add, store.state.list.at(i).id - 1, true);
+    }
   },
   data() {
     return {
@@ -145,8 +151,17 @@ export default {
       this.$set(this.videoOptions.sources[0], "src", videoLink);
       return this.videoOptions;
     },
-    setAddList(index) {
+    async addToList(index, videoId) {
       this.$set(this.add, index, !this.add.at(index));
+      let formData = new FormData();
+      formData.append("videoId", videoId);
+      var response;
+      if (this.add.at(index)) {
+        response = await Vue.axios.post("/api/videos/mylist/add", formData);
+      } else {
+        response = await Vue.axios.post("/api/videos/mylist/remove", formData);
+      }
+      return response.data;
     },
     addToVideos(video) {
       this.videoList.push(video);

@@ -13,12 +13,30 @@
       />
     </v-col>
     <v-col class="justify-center">
-      <v-btn block color="#616161" class="mr-4 white--text" @click="create">
-        Create
+      <v-btn
+        block
+        color="#616161"
+        class="mr-4 white--text"
+        @click="create"
+        elevation="2"
+        depressed
+      >
+        Create Comment
       </v-btn>
     </v-col>
+    <br />
     <div v-for="(item, index) in subtitles" :key="index">
-      {{ item.username }} {{ item.comment }} @{{ item.timestamp }} seconds
+      <v-card class="mx-auto">
+        <v-card-text>
+          <div>User</div>
+          <p class="text-h6 text--primary">{{ item.username }}</p>
+          <div class="text-h5 text--primary">
+            {{ item.comment }}<br />
+            @{{ item.timestamp }} seconds
+          </div>
+        </v-card-text>
+      </v-card>
+      <br />
     </div>
   </div>
 </template>

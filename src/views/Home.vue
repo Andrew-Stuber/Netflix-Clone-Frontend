@@ -1,5 +1,14 @@
 <template>
   <v-container>
+    <v-col justify-end>
+      <v-text-field
+        v-model="search"
+        filled
+        rounded
+        label="Search Videos"
+        clearable
+      ></v-text-field>
+    </v-col>
     <ul>
       <!--li>
         <router-link to="/about">Go to About</router-link>
@@ -9,7 +18,7 @@
           cols="12"
           sm="3"
           md="4"
-          v-for="(video, index) in videos"
+          v-for="(video, index) in filteredVideos"
           :key="index"
         >
           <div>
@@ -81,6 +90,7 @@
 <script>
 import store from "@/store";
 import BoxVideo from "@/views/BoxVideo";
+
 export default {
   name: "Home.vue",
   components: {
@@ -88,6 +98,7 @@ export default {
   },
   data() {
     return {
+      search: "",
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
@@ -124,6 +135,13 @@ export default {
       this.$set(this.add, index, !this.add.at(index));
     },
   },
+  computed: {
+    filteredVideos() {
+      return this.videos.filter((video) =>
+        video.title.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -134,5 +152,9 @@ export default {
   top: 90%;
   left: 90%;
   position: absolute;
+}
+body {
+  background: #f6e9e3;
+  background-size: 100% 100%;
 }
 </style>

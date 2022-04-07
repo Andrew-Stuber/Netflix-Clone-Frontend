@@ -84,9 +84,6 @@ import BoxVideo from "@/views/BoxVideo";
 
 export default {
   name: "Home.vue",
-  props: {
-
-  }
   components: {
     BoxVideo,
   },

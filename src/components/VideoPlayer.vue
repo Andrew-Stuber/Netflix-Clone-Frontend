@@ -5,8 +5,20 @@
       class="video-js vjs-theme-city vjs-fluid"
       @timeupdate="onPlayerTimeupdate($event)"
     />
+    <v-col>
+      <v-text-field
+        label="Main input"
+        v-model="newComment"
+        hide-details="auto"
+      />
+    </v-col>
+    <v-col class="justify-center">
+      <v-btn block color="#616161" class="mr-4 white--text" @click="create">
+        Create
+      </v-btn>
+    </v-col>
     <div v-for="(item, index) in subtitles" :key="index">
-      {{ item.comment }} @{{ item.timestamp }} seconds
+      {{ item.username }} {{ item.comment }} @{{ item.timestamp }} seconds
     </div>
   </div>
 </template>
@@ -48,6 +60,7 @@ export default {
     return {
       player: null,
       subtitles: [],
+      newComment: "",
     };
   },
   async mounted() {
@@ -76,14 +89,14 @@ export default {
       formData.append("videoId", this.$route.params.id);
       await Vue.axios.post("/api/timestamp/update", formData);
     },
+    async create() {
+      let formData = new FormData();
+      formData.append("videoId", this.$route.params.id);
+      formData.append("comment", this.newComment);
+      await Vue.axios.post("/api/videos/comment/update", formData);
+      let response = await Vue.axios.post("/api/videos/comment", formData);
+      this.subtitles = response.data;
+    },
   },
 };
 </script>
-<style>
-.absoluteLeft {
-  left: 100%;
-}
-.absoluteRight {
-  right: 100%;
-}
-</style>

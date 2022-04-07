@@ -1,6 +1,10 @@
 <template>
   <div>
-    <video ref="videoPlayer" class="video-js vjs-theme-city vjs-16-9" />
+    <video
+      ref="videoPlayer"
+      class="video-js vjs-theme-city vjs-16-9"
+      @timeupdate="onPlayerTimeupdate($event)"
+    />
   </div>
 </template>
 
@@ -23,9 +27,11 @@ import "@videojs/themes/dist/forest/index.css";
 
 // Sea
 import "@videojs/themes/dist/sea/index.css";
+import Vue from "vue";
 export default {
   name: "BoxVideo",
   props: {
+    videoId: Number,
     options: {
       type: Object,
       default() {
@@ -34,11 +40,14 @@ export default {
     },
   },
   async mounted() {
+    let formData = new FormData();
+    formData.append("videoId", this.videoId.toString());
+    let responseTime = await Vue.axios.post("/api/timestamp/get", formData);
     this.player = videojs(
       this.$refs.videoPlayer,
-      this.$props.options,
+      this.options,
       function onPlayerReady() {
-        this.currentTime(0);
+        this.currentTime(responseTime.data.timestamp);
       }
     );
   },
@@ -50,5 +59,14 @@ export default {
   data: () => ({
     player: null,
   }),
+  methods: {
+    // eslint-disable-next-line no-unused-vars
+    async onPlayerTimeupdate(player) {
+      let formData = new FormData();
+      formData.append("videoId", this.videoId.toFixed());
+      formData.append("timestamp", this.player.currentTime());
+      await Vue.axios.post("/api/timestamp/update", formData);
+    },
+  },
 };
 </script>

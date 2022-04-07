@@ -63,6 +63,7 @@ export default {
     // eslint-disable-next-line no-unused-vars
     async onPlayerTimeupdate(player) {
       let formData = new FormData();
+      formData.append("videoId", this.$route.params.id);
       formData.append("timestamp", this.player.currentTime());
       await Vue.axios.post("/api/timestamp/update", formData);
     },

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="body">
     <v-col justify-end>
       <h1>Anime</h1>
     </v-col>
@@ -139,16 +139,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.routerLink {
-  text-decoration: none;
-}
-.spinner {
-  top: 90%;
-  left: 90%;
-  position: absolute;
-}
-body {
-  background: #f6e9e3;
-  background-size: 100% 100%;
+.body {
+  background-image: url("../assets/ani.png");
+  background-size: 130% 100%;
+  height: 100%;
 }
 </style>

@@ -41,6 +41,7 @@
                     <BoxVideo
                       :options="setVideoSrc(video.link)"
                       v-if="mouseHover[index]"
+                      :video-id="video.id"
                     />
                     <!--                  <v-card-title class="justify-center">-->
                     <!--                    {{ video.title }}-->

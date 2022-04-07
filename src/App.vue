@@ -25,25 +25,10 @@
       <div>
         <v-btn plain text to="/" :ripple="false">Home</v-btn>
       </div>
-      <div>
-        <v-btn plain text :ripple="false" to="/list">My List</v-btn>
-      </div>
-      <div>
-        <v-btn plain text :ripple="false">
-          <a
-            target="_blank"
-            href="https://www.youtube.com/watch?v=5T5BY1j2MkE"
-            style="text-decoration: none"
-          >
-            About
-          </a>
-        </v-btn>
-      </div>
-
       <div class="text-center">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="error" dark v-bind="attrs" v-on="on">
+            <v-btn plain text :ripple="false" v-bind="attrs" v-on="on">
               category
             </v-btn>
           </template>
@@ -57,6 +42,20 @@
             <v-list-item to="/romance">Romance</v-list-item>
           </v-list>
         </v-menu>
+      </div>
+      <div>
+        <v-btn plain text :ripple="false" to="/list">My List</v-btn>
+      </div>
+      <div>
+        <v-btn plain text :ripple="false">
+          <a
+            target="_blank"
+            href="https://www.youtube.com/watch?v=5T5BY1j2MkE"
+            style="text-decoration: none"
+          >
+            About
+          </a>
+        </v-btn>
       </div>
 
       <v-spacer></v-spacer>

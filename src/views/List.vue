@@ -1,81 +1,88 @@
 <template>
-  <v-container>
-    <ul>
-      <!--li>
-        <router-link to="/about">Go to About</router-link>
-      </li-->
-      <v-row>
-        <v-col
-          cols="12"
-          sm="3"
-          md="4"
-          v-for="(video, index) in filteredVideos"
-          :key="index"
-        >
-          <div>
-            <v-card
-              class="mx-auto"
-              width="344"
-              max-height="360"
-              :ripple="true"
-              @mouseenter="setMouseHoverEnter(index)"
-              @mouseleave="setMouseHoverLeave(index)"
-            >
-              <!-- Video Link -->
-              <router-link class="routerLink" :to="'/video/' + video.id">
-                <div @click="spinner = true">
-                  <h2 class="ml-2">{{ video.title }}</h2>
-                  <v-img
-                    lazy-src="https://i.imgur.com/XJRowdx.png"
-                    height="200px"
-                    :src="video.thumbnail"
-                    v-show="!mouseHover[index]"
-                  />
-                  <!-- Box Video Stuff -->
-                  <BoxVideo
-                    :options="setVideoSrc(video.link)"
-                    v-if="mouseHover[index]"
-                  />
-                  <!--                  <v-card-title class="justify-center">-->
-                  <!--                    {{ video.title }}-->
-                  <!--                  </v-card-title>-->
-                </div>
-              </router-link>
+  <div>
+    <div>
+      <h1 class="page_title ml-14">My List</h1>
+    </div>
+    <v-container>
+      <div class="ma-16 pl-16 ml-16" v-if="amount === 0">
+        <h1 class="ml-lg-16 pl-16">
+          You haven't added any titles to your list yet.
+        </h1>
+      </div>
+      <ul>
+        <v-row>
+          <v-col
+            cols="12"
+            sm="3"
+            md="4"
+            v-for="(video, index) in list"
+            :key="index"
+          >
+            <div>
+              <v-card
+                class="mx-auto"
+                width="344"
+                max-height="360"
+                :ripple="true"
+                @mouseenter="setMouseHoverEnter(index)"
+                @mouseleave="setMouseHoverLeave(index)"
+              >
+                <!-- Video Link -->
+                <router-link class="routerLink" :to="'/video/' + video.id">
+                  <div @click="spinner = true">
+                    <h2 class="ml-2">{{ video.title }}</h2>
+                    <v-img
+                      lazy-src="https://i.imgur.com/XJRowdx.png"
+                      height="200px"
+                      :src="video.thumbnail"
+                      v-show="!mouseHover[index]"
+                    />
+                    <!-- Box Video Stuff -->
+                    <BoxVideo
+                      :options="setVideoSrc(video.link)"
+                      v-if="mouseHover[index]"
+                    />
+                    <!--                  <v-card-title class="justify-center">-->
+                    <!--                    {{ video.title }}-->
+                    <!--                  </v-card-title>-->
+                  </div>
+                </router-link>
 
-              <!-- Drop Down -->
-              <v-card-actions>
-                <v-btn icon @click="setAddList(index)">
-                  <v-icon>{{
-                    add.at(index) ? "mdi-check" : "mdi-plus"
-                  }}</v-icon>
-                </v-btn>
-                <v-spacer />
-                <v-btn icon @click="setDescription(index)">
-                  <v-icon>{{
-                    show.at(index) ? "mdi-chevron-up" : "mdi-chevron-down"
-                  }}</v-icon>
-                </v-btn>
-              </v-card-actions>
+                <!-- Drop Down -->
+                <v-card-actions>
+                  <v-btn icon @click="setAddList(index)">
+                    <v-icon>{{
+                      add.at(index) ? "mdi-check" : "mdi-plus"
+                    }}</v-icon>
+                  </v-btn>
+                  <v-spacer />
+                  <v-btn icon @click="setDescription(index)">
+                    <v-icon>{{
+                      show.at(index) ? "mdi-chevron-up" : "mdi-chevron-down"
+                    }}</v-icon>
+                  </v-btn>
+                </v-card-actions>
 
-              <v-expand-transition>
-                <div v-show="show.at(index)">
-                  <v-card-text>
-                    {{ video.description }}
-                  </v-card-text>
-                </div>
-              </v-expand-transition>
-            </v-card>
-          </div>
-        </v-col>
-      </v-row>
-    </ul>
-    <v-progress-circular
-      class="spinner"
-      indeterminate
-      color="primary"
-      v-if="spinner"
-    />
-  </v-container>
+                <v-expand-transition>
+                  <div v-show="show.at(index)">
+                    <v-card-text>
+                      {{ video.description }}
+                    </v-card-text>
+                  </div>
+                </v-expand-transition>
+              </v-card>
+            </div>
+          </v-col>
+        </v-row>
+      </ul>
+      <v-progress-circular
+        class="spinner"
+        indeterminate
+        color="primary"
+        v-if="spinner"
+      />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -89,11 +96,13 @@ export default {
   },
   data() {
     return {
+      list: store.state.list,
       search: "",
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
       add: new Array(store.state.numList).fill(false),
+      amount: store.state.numList,
       mouseHover: new Array(store.state.numVideos).fill(false),
       videoOptions: {
         autoplay: true,

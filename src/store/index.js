@@ -12,7 +12,7 @@ export default new Vuex.Store({
     role: "",
     videos: null,
     numVideos: 0,
-    list: null,
+    list: [],
     numList: 0,
   },
   mutations: {
@@ -39,6 +39,9 @@ export default new Vuex.Store({
     },
     setNumList(state, numList) {
       state.numList = numList;
+    },
+    appendList(state, listVideos) {
+      state.list.push(listVideos);
     },
   },
   actions: {
@@ -68,6 +71,10 @@ export default new Vuex.Store({
       commit("setUsername", response.data.username);
       commit("setName", response.data.name);
       commit("setRole", response.data.role);
+    },
+    async getAllListVideos({ commit }) {
+      let response = await Vue.axios.get("/api/videos/mylist");
+      commit("setList", response.data.mylistvideo);
     },
   },
   modules: {},

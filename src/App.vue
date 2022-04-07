@@ -9,7 +9,6 @@
       <div>
         <v-btn
           plain
-          text
           :ripple="false"
           target="_blank"
           href="https://www.youtube.com/watch?v=5DlROhT8NgU"

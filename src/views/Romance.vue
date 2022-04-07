@@ -140,7 +140,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .body {
-  background-image: url("../assets/rm.jpeg");
+  background-image: url("../assets/rm.png");
   background-size: 100% 100%;
   height: 100%;
 }

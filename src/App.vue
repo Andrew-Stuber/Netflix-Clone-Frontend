@@ -29,6 +29,37 @@
             </a>
           </v-btn>
         </div>
+
+        <div>
+          <v-btn plain text :ripple="false">
+            <a
+              target="_blank"
+              href="https://www.youtube.com/watch?v=5T5BY1j2MkE"
+              style="text-decoration: none"
+            >
+              About
+            </a>
+          </v-btn>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="error" dark v-bind="attrs" v-on="on">
+              category
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item to="/action">Action</v-list-item>
+            <v-list-item to="/anime">Anime</v-list-item>
+            <v-list-item to="/drama">Drama</v-list-item>
+            <v-list-item to="/fantasy">Fantasy</v-list-item>
+            <v-list-item to="/horror">Horror</v-list-item>
+            <v-list-item to="/mystery">Mystery</v-list-item>
+            <v-list-item to="/romance">Romance</v-list-item>
+          </v-list>
+        </v-menu>
       </div>
 
       <v-spacer></v-spacer>

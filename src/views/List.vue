@@ -4,7 +4,7 @@
       <h1 class="page_title ml-14">My List</h1>
     </div>
     <v-container>
-      <div class="ma-16 pl-16 ml-16" v-if="amount === 0">
+      <div class="ma-16 pl-16 ml-16" v-if="this.list.length === 0">
         <h1 class="ml-lg-16 pl-16">
           You haven't added any titles to your list yet.
         </h1>
@@ -50,11 +50,6 @@
 
                 <!-- Drop Down -->
                 <v-card-actions>
-                  <v-btn icon @click="setAddList(index)">
-                    <v-icon>{{
-                      add.at(index) ? "mdi-check" : "mdi-plus"
-                    }}</v-icon>
-                  </v-btn>
                   <v-spacer />
                   <v-btn icon @click="setDescription(index)">
                     <v-icon>{{
@@ -94,15 +89,19 @@ export default {
   components: {
     BoxVideo,
   },
+  async created() {
+    await store.dispatch("getAllListVideos");
+    for (let i = 0; i < store.state.list.length; i++) {
+      this.$set(this.list, i, store.state.list.at(i));
+    }
+  },
   data() {
     return {
-      list: store.state.list,
+      list: [],
       search: "",
       videos: store.state.videos,
       spinner: false,
       show: new Array(store.state.numVideos).fill(false),
-      add: new Array(store.state.numList).fill(false),
-      amount: store.state.numList,
       mouseHover: new Array(store.state.numVideos).fill(false),
       videoOptions: {
         autoplay: true,

@@ -109,12 +109,10 @@ export default {
   components: {
     BoxVideo,
   },
-  async mounted() {
-    let response = await Vue.axios.get("/api/videos/mylist");
-    for (let i = 0; i < response.data.mylistvideo.length; i++) {
-      this.$set(this.add, response.data.mylistvideo.at(i).id - 1, true);
+  created() {
+    for (let i = 0; i < store.state.list.length; i++) {
+      this.$set(this.add, store.state.list.at(i).id - 1, true);
     }
-    console.log(response.data.mylistvideo.at(0));
   },
   data() {
     return {
@@ -153,10 +151,16 @@ export default {
       return this.videoOptions;
     },
     async addToList(index, videoId) {
+      this.$set(this.add, index, !this.add.at(index));
       let formData = new FormData();
       formData.append("videoId", videoId);
-      this.$set(this.add, index, !this.add.at(index));
-      await Vue.axios.post("/api/videos/mylist/add", formData);
+      var response;
+      if (this.add.at(index)) {
+        response = await Vue.axios.post("/api/videos/mylist/add", formData);
+      } else {
+        response = await Vue.axios.post("/api/videos/mylist/remove", formData);
+      }
+      return response.data;
     },
     addToVideos(video) {
       this.videoList.push(video);

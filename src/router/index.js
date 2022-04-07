@@ -135,8 +135,6 @@ router.beforeEach(async (to, from, next) => {
     // otherwise, let go
     next();
   }
-  // get list videos
-  await store.dispatch("getAllListVideos");
 });
 
 export default router;

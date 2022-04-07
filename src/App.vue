@@ -47,15 +47,7 @@
         <v-btn plain text :ripple="false" to="/list">My List</v-btn>
       </div>
       <div>
-        <v-btn plain text :ripple="false">
-          <a
-            target="_blank"
-            href="https://www.youtube.com/watch?v=5T5BY1j2MkE"
-            style="text-decoration: none"
-          >
-            About
-          </a>
-        </v-btn>
+        <v-btn plain text :ripple="false" to="/about"> About </v-btn>
       </div>
 
       <v-spacer></v-spacer>

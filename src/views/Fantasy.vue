@@ -1,5 +1,5 @@
 <template>
-  <v-container class="body">
+  <v-container fluid class="body">
     <v-col justify-end>
       <h1>Fantasy</h1>
     </v-col>

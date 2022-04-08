@@ -13,7 +13,13 @@
       />
     </v-col>
     <v-col class="justify-center">
-      <v-btn block color="#616161" class="mr-4 white--text" @click="create">
+      <v-btn
+        block
+        color="#616161"
+        class="mr-4 white--text"
+        @click="delay"
+        :disabled="disabled"
+      >
         Create
       </v-btn>
     </v-col>
@@ -61,6 +67,8 @@ export default {
       player: null,
       subtitles: [],
       newComment: "",
+      disabled: false,
+      timeout: null,
     };
   },
   async mounted() {
@@ -80,6 +88,7 @@ export default {
     if (this.player) {
       this.player.dispose();
     }
+    clearTimeout(this.timeout);
   },
   methods: {
     // eslint-disable-next-line no-unused-vars
@@ -97,6 +106,14 @@ export default {
       await Vue.axios.post("/api/videos/comment/update", formData);
       let response = await Vue.axios.post("/api/videos/comment", formData);
       this.subtitles = response.data;
+    },
+    delay() {
+      this.create();
+      this.disabled = true;
+      // Re-enable after 5 seconds
+      this.timeout = setTimeout(() => {
+        this.disabled = false;
+      }, 5000);
     },
   },
 };

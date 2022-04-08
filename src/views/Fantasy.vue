@@ -48,7 +48,7 @@
 
               <!-- Drop Down -->
               <v-card-actions>
-                <v-btn icon @click="setAddList(index)">
+                <v-btn icon @click="setAddList(index, video.id)">
                   <v-icon>{{
                     add.at(index) ? "mdi-check" : "mdi-plus"
                   }}</v-icon>
@@ -85,6 +85,7 @@
 <script>
 import store from "@/store";
 import BoxVideo from "@/views/BoxVideo";
+import Vue from "vue";
 
 export default {
   name: "Fantasy.vue",
@@ -126,8 +127,17 @@ export default {
       this.$set(this.videoOptions.sources[0], "src", videoLink);
       return this.videoOptions;
     },
-    setAddList(index) {
+    async setAddList(index, videoId) {
       this.$set(this.add, index, !this.add.at(index));
+      let formData = new FormData();
+      formData.append("videoId", videoId);
+      var response;
+      if (this.add.at(index)) {
+        response = await Vue.axios.post("/api/videos/mylist/add", formData);
+      } else {
+        response = await Vue.axios.post("/api/videos/mylist/remove", formData);
+      }
+      return response.data;
     },
   },
   computed: {

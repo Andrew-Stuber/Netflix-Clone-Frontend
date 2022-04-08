@@ -20,11 +20,22 @@
         @click="delay"
         :disabled="disabled"
       >
-        Create
+        Create Comment
       </v-btn>
     </v-col>
+    <br />
     <div v-for="(item, index) in subtitles" :key="index">
-      {{ item.username }} {{ item.comment }} @{{ item.timestamp }} seconds
+      <v-card class="mx-auto">
+        <v-card-text>
+          <div>User</div>
+          <p class="text-h6 text--primary">{{ item.username }}</p>
+          <div class="text-h5 text--primary">
+            {{ item.comment }}<br />
+            @{{ item.timestamp }} seconds
+          </div>
+        </v-card-text>
+      </v-card>
+      <br />
     </div>
   </div>
 </template>
@@ -100,12 +111,15 @@ export default {
       await Vue.axios.post("/api/timestamp/update", formData);
     },
     async create() {
-      let formData = new FormData();
-      formData.append("videoId", this.$route.params.id);
-      formData.append("comment", this.newComment);
-      await Vue.axios.post("/api/videos/comment/update", formData);
-      let response = await Vue.axios.post("/api/videos/comment", formData);
-      this.subtitles = response.data;
+      // Allow only non-empty comment
+      if (this.newComment) {
+        let formData = new FormData();
+        formData.append("videoId", this.$route.params.id);
+        formData.append("comment", this.newComment);
+        await Vue.axios.post("/api/videos/comment/update", formData);
+        let response = await Vue.axios.post("/api/videos/comment", formData);
+        this.subtitles = response.data;
+      }
     },
     delay() {
       this.create();

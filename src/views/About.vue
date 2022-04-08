@@ -26,7 +26,7 @@
   justify-content: center;
 }
 .theBoy {
-  background-image: url("../assets/netflix.jpg");
+  background-image: url("../assets/theBoys.jpeg");
   background-size: 100% 100%;
   height: 100%;
 }

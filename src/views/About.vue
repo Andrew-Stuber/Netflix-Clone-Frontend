@@ -10,3 +10,24 @@
     </div>
   </v-container>
 </template>
+
+<style lang="scss">
+.bg-image {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-image:before {
+  content: "";
+  background-image: url(../assets/bg-image.jpg);
+  background-size: cover;
+  position: absolute;
+  opacity: 0.4;
+}
+.card {
+  display: flex;
+  position: relative;
+}
+</style>
